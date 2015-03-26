@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/maven-v4_0_0.xsd">
-	<name>url-shortener-web</name>
+	<name>url-shortener-web-redirect</name>
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.repaskys</groupId>
@@ -9,7 +9,7 @@
 		<version>0.0.3-SNAPSHOT</version>
 		<relativePath>../url-shortener-build</relativePath>
 	</parent>
-	<artifactId>url-shortener-web</artifactId>
+	<artifactId>url-shortener-web-redirect</artifactId>
 	<packaging>war</packaging>
 	<dependencies>
 		<dependency>
@@ -52,14 +52,8 @@
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-		</dependency>
-
 	</dependencies>
 	<build>
-		<finalName>url-shortener-web</finalName>
+		<finalName>url-shortener-web-redirect</finalName>
 	</build>
 </project>

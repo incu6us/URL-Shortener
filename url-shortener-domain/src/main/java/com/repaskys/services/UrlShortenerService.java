@@ -39,4 +39,5 @@ public interface UrlShortenerService {
    String saveUrl(ShortUrl shortUrl);
    Iterable<ShortUrl> findAll();
    String expandShortUrl(String shortUrl);
+   String deleteUrl(String shortUrl);
 }

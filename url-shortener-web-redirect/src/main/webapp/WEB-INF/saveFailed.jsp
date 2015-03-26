@@ -5,9 +5,7 @@
    <head>
       <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
       <title>Add URL</title>
-<!--       <link rel="stylesheet" type="text/css" href="static/styles.css"/> -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="static/styles.css"/>
    </head>
    <body>
       <h1>URL was not saved due to the following problems:</h1>

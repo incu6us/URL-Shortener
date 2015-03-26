@@ -32,66 +32,89 @@ import com.repaskys.domain.ShortUrl;
 import com.repaskys.repositories.UrlRepository;
 
 /**
- * This class is for saving and finding ShortUrl instances.  It can also be used to expand a short code into a full URL.
- * The implementation uses a Spring Data JPA repository.
+ * This class is for saving and finding ShortUrl instances. It can also be used
+ * to expand a short code into a full URL. The implementation uses a Spring Data
+ * JPA repository.
  *
  * @author Drew Repasky
  */
 public class UrlShortenerServiceImpl implements UrlShortenerService {
 
-   private static final Logger LOGGER = LoggerFactory.getLogger(UrlShortenerServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UrlShortenerServiceImpl.class);
 
-   @Autowired
-   private UrlRepository urlRepository;
+	@Autowired
+	private UrlRepository urlRepository;
 
-   @Autowired
-   private Validator validator;
+	@Autowired
+	private Validator validator;
 
-   public ShortUrl wasUrlAlreadyShortened(String fullUrl) {
-      return urlRepository.findByFullUrl(fullUrl);
-   }
+	public ShortUrl wasUrlAlreadyShortened(String fullUrl) {
+		return urlRepository.findByFullUrl(fullUrl);
+	}
 
-   public List<String> validateShortUrl(ShortUrl shortUrl) {
-      List<String> violations = new ArrayList<String>();
-      Set<ConstraintViolation<ShortUrl>> constraintViolations = validator.validate(shortUrl);
-      for(ConstraintViolation<ShortUrl> constraintViolation : constraintViolations) {
-         violations.add(constraintViolation.getMessage());
-      }
-      return violations;
-   }
+	public List<String> validateShortUrl(ShortUrl shortUrl) {
+		List<String> violations = new ArrayList<String>();
+		Set<ConstraintViolation<ShortUrl>> constraintViolations = validator.validate(shortUrl);
+		for (ConstraintViolation<ShortUrl> constraintViolation : constraintViolations) {
+			violations.add(constraintViolation.getMessage());
+		}
+		return violations;
+	}
 
-   public String saveUrl(ShortUrl shortUrl) {
-      LOGGER.trace("trying to save URL...");
-      String errorMessage = "";
+	public String saveUrl(ShortUrl shortUrl) {
+		LOGGER.trace("trying to save URL...");
+		String errorMessage = "";
 
-      // FIXME these cryptic exception messages will be bubbled up to the user
-      try {
-         // insert a new record
-         urlRepository.save(shortUrl);
+		// FIXME these cryptic exception messages will be bubbled up to the user
+		try {
+			// insert a new record
+			urlRepository.save(shortUrl);
 
-      } catch(DataAccessException ex) {
-         LOGGER.error("DataAccessException when saving ShortUrl", ex);
-         errorMessage = ex.getMessage();
-      } catch(TransactionException ex) {
-         // when we can't connect to the database, it throws a CannotCreateTransactionException
-         LOGGER.error("TransactionException when saving ShortUrl", ex);
-         errorMessage = ex.getMessage();
-      } catch(RuntimeException ex) {
-         // we need the generic catch all, so that the raw exception stack trace doesn't make it all the way back to the user
-         LOGGER.error("RuntimeException when saving ShortUrl", ex);
-         errorMessage = ex.getMessage();
-      }
-      return errorMessage;
-   }
+		} catch (DataAccessException ex) {
+			LOGGER.error("DataAccessException when saving ShortUrl", ex);
+			errorMessage = ex.getMessage();
+		} catch (TransactionException ex) {
+			// when we can't connect to the database, it throws a
+			// CannotCreateTransactionException
+			LOGGER.error("TransactionException when saving ShortUrl", ex);
+			errorMessage = ex.getMessage();
+		} catch (RuntimeException ex) {
+			// we need the generic catch all, so that the raw exception stack
+			// trace doesn't make it all the way back to the user
+			LOGGER.error("RuntimeException when saving ShortUrl", ex);
+			errorMessage = ex.getMessage();
+		}
+		return errorMessage;
+	}
 
-   public Iterable<ShortUrl> findAll() {
-      return urlRepository.findAll();
-   }
+	public Iterable<ShortUrl> findAll() {
+		return urlRepository.findAll();
+	}
 
-   public String expandShortUrl(String shortCode) {
-      Long id = ShortUrl.shortCodeToId(shortCode);
-      ShortUrl shortUrl = urlRepository.findOne(id);
-      return (shortUrl != null) ? shortUrl.getFullUrl() : "";
-   }
+	public String expandShortUrl(String shortCode) {
+		Long id = ShortUrl.shortCodeToId(shortCode);
+		ShortUrl shortUrl = urlRepository.findOne(id);
+		return (shortUrl != null) ? shortUrl.getFullUrl() : "";
+	}
 
+	public String deleteUrl(String fullUrl) {
+		String errorMessage = "";
+		try {
+			urlRepository.delete(urlRepository.findByFullUrl(fullUrl).getId());
+		} catch (DataAccessException ex) {
+			LOGGER.error("DataAccessException when saving ShortUrl", ex);
+			errorMessage = ex.getMessage();
+		} catch (TransactionException ex) {
+			// when we can't connect to the database, it throws a
+			// CannotCreateTransactionException
+			LOGGER.error("TransactionException when saving ShortUrl", ex);
+			errorMessage = ex.getMessage();
+		} catch (RuntimeException ex) {
+			// we need the generic catch all, so that the raw exception stack
+			// trace doesn't make it all the way back to the user
+			LOGGER.error("RuntimeException when saving ShortUrl", ex);
+			errorMessage = ex.getMessage();
+		}
+		return errorMessage;
+	}
 }

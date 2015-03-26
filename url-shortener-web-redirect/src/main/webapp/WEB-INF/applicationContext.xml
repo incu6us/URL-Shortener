@@ -19,10 +19,6 @@
    <bean id="urlShortenerAdminAction" class="com.repaskys.actions.UrlShortenerAdminAction" scope="prototype">
       <property name="urlShortenerService" ref="urlShortenerService"/>
    </bean>
-   
-   <bean id="urlShortenerDeleteAdminAction" class="com.repaskys.actions.UrlShortenerDeleteAdminAction" scope="prototype">
-      <property name="urlShortenerService" ref="urlShortenerService"/>
-   </bean>
 
    <bean id="urlExpandAction" class="com.repaskys.actions.UrlExpandAction" scope="prototype">
       <property name="urlShortenerService" ref="urlShortenerService"/>
