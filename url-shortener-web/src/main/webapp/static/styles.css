@@ -1,4 +1,3 @@
-body, label {
-	font-family: Arial, sans-serif;
+label[for="add_shortUrl_fullUrl"] {
+	color: black;
 }
-
