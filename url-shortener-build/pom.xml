@@ -10,6 +10,7 @@
    <modules>
       <module>../url-shortener-domain</module>
       <module>../url-shortener-web</module>
+      <module>../url-shortener-web-redirect</module>
    </modules>
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
