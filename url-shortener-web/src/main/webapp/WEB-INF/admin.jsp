@@ -34,9 +34,9 @@
 							<tr>
 								<td><s:property value="shortUrl" /></td>
 								<td><s:property value="fullUrl" /></td>
-								<td><a class="btn btn-info"
+								<td><a class="btn btn-info btn-xs"
 									href=<s:property value="shortUrl"/>>check</a></td>
-								<td><a class="btn btn-danger"
+								<td><a class="btn btn-danger btn-xs"
 									href="deleteShortUrl?url=<s:property value="fullUrl"/>">delete</a></td>
 							</tr>
 						</s:iterator>
