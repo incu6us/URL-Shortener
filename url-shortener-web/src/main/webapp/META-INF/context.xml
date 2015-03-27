@@ -14,7 +14,7 @@
 	<Resource name="jdbc/url_test" auth="Container" type="javax.sql.DataSource"
 		maxActive="50" maxIdle="30" maxWait="10000" username="root"
 		password="" driverClassName="com.mysql.jdbc.Driver"
-		url="jdbc:mysql://localhost:3306/shortnerlink" />
+		url="jdbc:mysql://localhost:3306/shortnerlink?createDatabaseIfNotExist=true" />
 	
 	<!-- <Environment name="envPropertiesFile" value="env-test.properties" type="java.lang.String" 
 		override="false"/> -->
